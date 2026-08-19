@@ -1,3 +1,4 @@
+import cv2
 import mediapipe as mp
 from mediapipe.tasks import python
 
@@ -13,3 +14,12 @@ options = mp.tasks.vision.HandLandmarkerOptions(
 )
 
 hand_landmarker = HandLandmarker.create_from_options(options)
+
+cap = cv2.VideoCapture(0)
+
+while True:
+    success, frame = cap.read()
+    cv2.imshow("Camera", frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
