@@ -17,8 +17,16 @@ hand_landmarker = HandLandmarker.create_from_options(options)
 
 cap = cv2.VideoCapture(0)
 
+prev_x = None
+prev_y = None
+
+canvas = None
+
 while True:
     success, frame = cap.read()
+
+    if canvas is None:
+        canvas = frame.copy()
 
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -32,6 +40,14 @@ while True:
             pixel_y = int(hand[8].y * frame.shape[0])
 
             cv2.circle(frame, (pixel_x, pixel_y), 10, (0, 255, 0), -1)
+
+            if prev_x is not None and prev_y is not None:
+                cv2.line(canvas, (prev_x, prev_y), (pixel_x, pixel_y), (0, 255, 0), 5)
+
+            prev_x = pixel_x
+            prev_y = pixel_y    
+
+    frame = cv2.addWeighted(frame, 1, canvas, 1, 0)        
 
     cv2.imshow("Camera", frame)
 
