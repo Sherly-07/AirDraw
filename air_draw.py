@@ -31,7 +31,7 @@ while True:
             pixel_x = int(hand[8].x * frame.shape[1])
             pixel_y = int(hand[8].y * frame.shape[0])
 
-            cv2.circle(frame, (pixel_x, pixel_y), 10, (255, 0, 0), -1)
+            cv2.circle(frame, (pixel_x, pixel_y), 10, (0, 255, 0), -1)
 
     cv2.imshow("Camera", frame)
 
