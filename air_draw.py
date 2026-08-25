@@ -47,6 +47,10 @@ while True:
             prev_x = pixel_x
             prev_y = pixel_y    
 
+    else:
+        prev_x = None
+        prev_y = None        
+
     frame = cv2.addWeighted(frame, 1, canvas, 1, 0)        
 
     cv2.imshow("Camera", frame)
